@@ -24,6 +24,9 @@ class MainFragment : Fragment() {
     lateinit var btnContinue: Button
 
 
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
