@@ -35,6 +35,8 @@ class MainFragment : Fragment() {
         return binding.root   // getRoot()?
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnContinue = view.findViewById(R.id.btnContinue)
