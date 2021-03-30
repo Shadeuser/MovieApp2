@@ -9,4 +9,8 @@ class RepositoryImpl: Repository{
     override fun getFilmFromRemoteStorage(): Film {
         return Film()
     }
+
+    override fun getWorldFilmsFromLocalStorage(): List<Film> {
+        return getWorldFilms()
+    }
 }

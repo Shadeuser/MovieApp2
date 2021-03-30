@@ -15,6 +15,7 @@ class ViewModelBase (
     fun getLiveData() = liveDataToObserve
 
     fun getFilmFromLocalSource() = getDataFromLocalSource()
+    fun getWorldFilmsFromLocalSource() = getDataFromLocalSource()
 
     fun getFilmFromRemoteSource() = getDataFromLocalSource()
 
@@ -22,8 +23,8 @@ class ViewModelBase (
         liveDataToObserve.value = AppState.Loading
         Thread {
             sleep(1000)
-            liveDataToObserve.postValue(AppState.Success(repositoryImpl.getFilmFromLocalStorage()))
-        }
+            liveDataToObserve.postValue(AppState.Success(repositoryImpl.getWorldFilmsFromLocalStorage()))
+        }.start()
     }
 
 
