@@ -15,6 +15,7 @@ import com.example.movieapp.databinding.MainFragmentBinding
 import com.example.movieapp.model.Film
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.ViewModelBase
+import com.google.android.material.snackbar.Snackbar
 
 
 class MainFragment : Fragment() {
@@ -25,7 +26,7 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: ViewModelBase
 
 
-    //    lateinit var btnContinue: Button
+
 
     private val adapter = MainAdapter(object : OnItemViewClickListener {
         override fun onItemViewClick(film: Film) {
@@ -35,7 +36,7 @@ class MainFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putParcelable(FilmDetailsFragment.BUNDLE_EXTRA, film)
                 manager.beginTransaction()
-                    .replace(R.id.itemContainer, FilmDetailsFragment.newInsance(bundle))
+                    .replace(R.id.container, FilmDetailsFragment.newInsance(bundle))
                     .addToBackStack("")
                     .commitAllowingStateLoss()
 
@@ -61,6 +62,8 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ViewModelBase::class.java)
         viewModel.getLiveData().observe(viewLifecycleOwner, Observer { prepareData(it) })
         viewModel.getFilmFromLocalSource()
+
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

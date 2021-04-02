@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.model.Film
 
-class MainAdapter(private var onItemViewClickListener: MainFragment.OnItemViewClickListener): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class MainAdapter(
+    private var onItemViewClickListener: MainFragment.OnItemViewClickListener?
+    ): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     var filmData: List<Film> = listOf()
     set(value) {
@@ -38,7 +40,6 @@ class MainAdapter(private var onItemViewClickListener: MainFragment.OnItemViewCl
             itemView.findViewById<TextView>(R.id.txtViewMainRecycclerItem).text = film.film
             itemView.setOnClickListener {
                 onItemViewClickListener?.onItemViewClick(film)
-//                Toast.makeText(itemView.context, film.film, Toast.LENGTH_LONG).show()
             }
         }
     }
