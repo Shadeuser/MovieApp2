@@ -25,4 +25,6 @@ fun getWorldFilms(): List<Film> {
         Film("Молчание ягнят", R.drawable.the_silence_of_the_lambs, "триллер, детектив, криминал, драма, ужасы", 2019),
         Film("Чужой", R.drawable.alien, "ужасы, фантастика, триллер", 2019),
     )
+
+
 }

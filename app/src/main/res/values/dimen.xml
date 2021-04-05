@@ -18,8 +18,10 @@
     <dimen name="txt_genre_text_size">20sp</dimen>
     <dimen name="txt_year_margin_top">30dp</dimen>
     <dimen name="txt_year_text_size">20sp</dimen>
-    <dimen name="img_film_poster_width">200dp</dimen>
-    <dimen name="img_film_poster_height">300dp</dimen>
+    <dimen name="img_film_poster_width">150dp</dimen>
+    <dimen name="img_film_poster_height">200dp</dimen>
+    <dimen name="txt_film_continue_margin_top">20dp</dimen>
+    <dimen name="txt_film_continue_text_size">20sp</dimen>
 
 
 </resources>

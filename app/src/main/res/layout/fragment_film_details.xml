@@ -24,25 +24,42 @@
             android:textStyle="bold"
             android:layout_marginTop="@dimen/txt_film_name_margin_top"/>
 
-        <ImageView
-            android:id="@+id/imgFilmPoster"
-            android:layout_width="@dimen/img_film_poster_width"
-            android:layout_height="@dimen/img_film_poster_height"
-            app:layout_constraintTop_toBottomOf="@id/txtFilmName"
+        <LinearLayout
+            android:id="@+id/lineaLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/img_film_poster_margin_top"
-            android:contentDescription="@string/img_film_poster_content_description" />
+            app:layout_constraintTop_toBottomOf="@id/txtFilmName"
+            android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/imgFilmPoster"
+                    android:layout_width="146dp"
+                    android:layout_height="@dimen/img_film_poster_height"
+                    android:contentDescription="@string/img_film_poster_content_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtFilmName" />
+                <TextView
+                    android:id="@+id/txtFilmOverView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_film_over_view_text_size"
+                    android:textStyle="italic"
+                    android:text=""/>
+
+        </LinearLayout>
+
 
         <TextView
 
             android:id="@+id/txtGenre"
             android:text="@string/film_genre_txt"
             android:layout_width="wrap_content"
-            android:layout_height="130dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgFilmPoster"
+            app:layout_constraintTop_toBottomOf="@id/lineaLayout"
             android:textSize="@dimen/txt_genre_text_size"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/txt_genre_margin_top"/>
@@ -58,6 +75,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtGenre"
             android:textSize="@dimen/txt_year_text_size" />
+        <TextView
+            android:id="@+id/txtFilmContinue"
+            android:text="@string/txt_film_continue_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/txtYear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="italic"
+            android:textSize="@dimen/txt_film_continue_text_size"
+            android:layout_marginTop="@dimen/txt_film_continue_margin_top" />
 
         <Button
             android:id="@+id/btnContinue"

@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
-import com.example.movieapp.model.Film
+import com.example.movieapp.model.*
 
 class MainAdapter(
     private var onItemViewClickListener: MainFragment.OnItemViewClickListener?
     ): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    var filmData: List<Film> = listOf()
+
+    var filmData: PopularMovies? = null
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -27,22 +27,23 @@ class MainAdapter(
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(filmData[position])
+        if (filmData != null) {
+            val film = filmData?.results!![position]
+            holder.bind(film)
+        }
     }
 
     override fun getItemCount(): Int {
-        return filmData.size
+        return filmData?.results?.size ?: return 0
     }
 
 
     inner class MainViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bind(film: Film) {
-            itemView.findViewById<TextView>(R.id.txtViewMainRecycclerItem).text = film.film
+        fun bind(film: FilmShortDetails) {
+            itemView.findViewById<TextView>(R.id.txtViewMainRecycclerItem).text = film.title
             itemView.setOnClickListener {
                 onItemViewClickListener?.onItemViewClick(film)
             }
         }
     }
-
-
 }
