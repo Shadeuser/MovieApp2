@@ -15,6 +15,7 @@ import java.io.InputStreamReader
 import java.lang.Exception
 
 import java.net.URL
+import java.security.cert.CertPathValidatorException
 import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 class FilmServer<T : ViewBinding>(
@@ -58,15 +59,15 @@ class FilmServer<T : ViewBinding>(
         val uri = URL(urlInputText)
         val handler = Handler(Looper.getMainLooper())
         Thread {
-            try {
+//            try {
                 val popularMovies = Gson().fromJson(getJsonText(uri), PopularMovies::class.java)
                 handler.post {
 
                     bindPopularFilmList(adapter, popularMovies)
                 }
-            } catch (e: Exception) {
-                e.printStackTrace() //log
-            }
+//            } catch (e: Exception) {
+//                e.printStackTrace() //log
+//            }
         }.start()
 
     }
@@ -78,11 +79,18 @@ class FilmServer<T : ViewBinding>(
             urlConnection = uri.openConnection() as HttpsURLConnection
             urlConnection.requestMethod = "GET"
             urlConnection.readTimeout = 5000
-            val reader = BufferedReader(InputStreamReader(urlConnection.inputStream))
+
+                val reader = BufferedReader(InputStreamReader(urlConnection.inputStream))
+
+
+
+
             return getStringLines(reader)
+
         } finally {
             urlConnection?.disconnect()
         }
+
     }
 
     private fun bindFilmDetails(
@@ -116,9 +124,9 @@ class FilmServer<T : ViewBinding>(
     }
 
 
-    private fun getStringLines(reader: BufferedReader): String {
-        return reader.lines().collect(Collectors.joining("\n"))
-    }
+        private fun getStringLines(reader: BufferedReader): String {
+            return reader.lines().collect(Collectors.joining("\n"))
+        }
 
     fun buildMovieDetailsUrl(
         id: Int,

@@ -1,12 +1,16 @@
 package com.example.movieapp.ui.main
 
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.example.movieapp.MainBroadCastReceiver
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentFilmDetailsBinding
 import com.example.movieapp.model.FilmServer
@@ -36,16 +40,22 @@ class FilmDetailsFragment : Fragment(){
         filmServer.getCurrentMovieDetails(filmServer.buildMovieDetailsUrl(film.id), view)
         btnContinue = view.findViewById(R.id.btnContinue)
         btnContinue.setOnClickListener {
-            view.quickSnackBar("Вернуться на экран поиска?", "Да",
-            Color.BLUE, View.OnClickListener {
-                val manager = activity?.supportFragmentManager
-                    manager?.beginTransaction()?.replace(R.id.container, MainFragment.newInstance())
-                        ?.commitNow()
-            })
+            val receiver = MainBroadCastReceiver()
+            val intent: Intent = Intent(NEW_CAT_DETECTED)
+            intent.putExtra("MSG!!!!!!!!!!!", "Здравствуйте, я кот!")
+
+//            requireActivity().registerReceiver(receiver, NEW_CAT_DETECTED)
+//            view.quickSnackBar("Вернуться на экран поиска?", "Да",
+//            Color.BLUE, View.OnClickListener {
+//                val manager = activity?.supportFragmentManager
+//                    manager?.beginTransaction()?.replace(R.id.container, MainFragment.newInstance())
+//                        ?.commitNow()
+//            })
         }
     }
 
     companion object {
+        const val NEW_CAT_DETECTED ="Кошка обнаружена!"
         const val BUNDLE_EXTRA = "film"
         fun newInsance(bundle: Bundle): FilmDetailsFragment {
             val fragment = FilmDetailsFragment()

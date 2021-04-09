@@ -11,8 +11,6 @@ import com.example.movieapp.model.*
 class MainAdapter(
     private var onItemViewClickListener: MainFragment.OnItemViewClickListener?
     ): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
-
-
     var filmData: PopularMovies? = null
     set(value) {
         field = value
