@@ -13,20 +13,17 @@ import com.squareup.picasso.Picasso
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.Exception
-
 import java.net.URL
-import java.security.cert.CertPathValidatorException
 import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
+
+const val CURRENT_MOVIE_URL_STARTS = "https://api.themoviedb.org/3/movie/"
+const val POPULAR_MOVIE_LIST_URL_STARTS = "https://api.themoviedb.org/3/movie/popular?api_key="
+
 class FilmServer<T : ViewBinding>(
     val binding: T
 
 ) {
-    private companion object {
-        val CURRENT_MOVIE_URL_STARTS = "https://api.themoviedb.org/3/movie/"
-        val POPULAR_MOVIE_LIST_URL_STARTS = "https://api.themoviedb.org/3/movie/popular?api_key="
-    }
-
     @RequiresApi(Build.VERSION_CODES.N)
     fun getCurrentMovieDetails(
         urlInputText: String,
@@ -47,9 +44,9 @@ class FilmServer<T : ViewBinding>(
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
         }.start()
     }
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun getPopularMovieList(
@@ -59,15 +56,15 @@ class FilmServer<T : ViewBinding>(
         val uri = URL(urlInputText)
         val handler = Handler(Looper.getMainLooper())
         Thread {
-//            try {
+            try {
                 val popularMovies = Gson().fromJson(getJsonText(uri), PopularMovies::class.java)
                 handler.post {
 
                     bindPopularFilmList(adapter, popularMovies)
                 }
-//            } catch (e: Exception) {
-//                e.printStackTrace() //log
-//            }
+            } catch (e: Exception) {
+                e.printStackTrace() //log
+            }
         }.start()
 
     }
@@ -79,14 +76,8 @@ class FilmServer<T : ViewBinding>(
             urlConnection = uri.openConnection() as HttpsURLConnection
             urlConnection.requestMethod = "GET"
             urlConnection.readTimeout = 5000
-
-                val reader = BufferedReader(InputStreamReader(urlConnection.inputStream))
-
-
-
-
+            val reader = BufferedReader(InputStreamReader(urlConnection.inputStream))
             return getStringLines(reader)
-
         } finally {
             urlConnection?.disconnect()
         }
@@ -100,17 +91,17 @@ class FilmServer<T : ViewBinding>(
     ) {
 
         inBinding.txtFilmName.text = movieDetails.title
-        inBinding.txtFilmContinue.text = "Продолжительность: ${movieDetails.runtime} мин."
+        "Продолжительность: ${movieDetails.runtime} мин.".also { inBinding.txtFilmContinue.text = it }
         Picasso.with(view.context)
             .load(movieDetails.poster_path)
             .into(
                 inBinding.imgFilmPoster
             )
         inBinding.txtFilmOverView.text = movieDetails.overview
-        inBinding.txtYear.text = "Релиз: ${movieDetails.release_date}"
+        "Релиз: ${movieDetails.release_date}".also { inBinding.txtYear.text = it }
 
         if (movieDetails.genres != null) {
-            var genre: String = ""
+            var genre = ""
             inBinding.txtGenre.text = ""
             movieDetails.genres.forEach {
                 genre += it.name + ","
@@ -127,6 +118,7 @@ class FilmServer<T : ViewBinding>(
         private fun getStringLines(reader: BufferedReader): String {
             return reader.lines().collect(Collectors.joining("\n"))
         }
+
 
     fun buildMovieDetailsUrl(
         id: Int,

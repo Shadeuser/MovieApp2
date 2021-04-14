@@ -1,7 +1,5 @@
 package com.example.movieapp.model
 
-import com.example.movieapp.databinding.MainFragmentBinding
-
 class RepositoryImpl: Repository{
 
     override fun getFilmFromLocalStorage(): Film {

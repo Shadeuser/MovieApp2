@@ -24,12 +24,6 @@ class MovieDetails() {
 
     val runtime: Int = 0
 
-
-//    fun getRuntime(): String {
-//        return "${runtime/60} чача"
-//    }
-
-
 }
 
 

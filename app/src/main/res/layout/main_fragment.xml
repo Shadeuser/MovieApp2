@@ -9,6 +9,8 @@
     tools:context=".ui.main.MainFragment">
 
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainRecyclerView"
         android:layout_width="match_parent"

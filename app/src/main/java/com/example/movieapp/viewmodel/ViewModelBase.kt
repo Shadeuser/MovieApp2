@@ -1,41 +1,45 @@
 package com.example.movieapp.viewmodel
 
-import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.model.Repository
-import com.example.movieapp.model.RepositoryImpl
-import java.io.BufferedInputStream
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import com.example.movieapp.model.*
+import retrofit2.Call
+import retrofit2.Response
 import java.lang.Thread.sleep
-import java.net.HttpURLConnection
-import java.net.URL
-import java.util.logging.Handler
-import java.util.stream.Collectors
-import javax.net.ssl.HttpsURLConnection
 
+//    private val repositoryImpl: Repository = RepositoryImpl()
 class ViewModelBase (
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
-    private val repositoryImpl: Repository = RepositoryImpl()
+    private val movieRepositoryImpl: MovieRepositoryImpl = MovieRepositoryImpl(RemoteDataSource())
 ): ViewModel() {
 
 
     fun getLiveData() = liveDataToObserve
-
-//    fun getFilmFromLocalSource() = getDataFromLocalSource()
-    fun getWorldFilmsFromLocalSource() = getWorldDataFromLocalSource()
-
-//    fun getFilmFromRemoteSource() = getDataFromRemoteSource()
-
-
-    private fun getWorldDataFromLocalSource() {
+    fun getPopularMovieFromRemoteSource(language: String, page: Int) {
         liveDataToObserve.value = AppState.Loading
-        Thread {
-            sleep(1000)
-            liveDataToObserve.postValue(AppState.Success(repositoryImpl.getWorldFilmsFromLocalStorage()))
-        }.start()
+        movieRepositoryImpl.getPopularFilmsRetrofit(language, page, callBack)
     }
+
+    private val callBack = object : retrofit2.Callback<PopularMovies> {
+
+        override fun onResponse(call: Call<PopularMovies>, response: Response<PopularMovies>) {
+            val serverResponse: PopularMovies? = response.body()
+            if (response.isSuccessful && serverResponse != null) {
+
+             liveDataToObserve.postValue(AppState.Success(serverResponse))
+//                AppState.Success(serverResponse)
+            } else {
+                liveDataToObserve.postValue(AppState.Error(Throwable("ОШИБКА СЕРВЕРА")))
+//                AppState.Error(Throwable("ОШИБКА СЕРВЕРА!"))
+            }
+        }
+
+        override fun onFailure(call: Call<PopularMovies>, t: Throwable) {
+            liveDataToObserve.postValue(AppState.Error(Throwable(t.message ?: "ОШИБКА ЗАПРОСА НА СЕВЕР")))
+        }
+    }
+
+
 
 
 

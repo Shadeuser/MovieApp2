@@ -2,25 +2,15 @@ package com.example.movieapp.ui.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.example.movieapp.R
 import com.example.movieapp.databinding.MainFragmentBinding
 import com.example.movieapp.model.*
-
 import com.example.movieapp.viewmodel.AppState
 import com.example.movieapp.viewmodel.ViewModelBase
-import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
-import kotlinx.coroutines.joinAll
-
 
 class MainFragment : Fragment() {
 
@@ -28,6 +18,7 @@ class MainFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ViewModelBase
+
 
 
 
@@ -53,38 +44,23 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.mainRecyclerView.adapter = adapter
-//        viewModel = ViewModelProvider(this).get(ViewModelBase::class.java)
-//        viewModel.getLiveData().observe(viewLifecycleOwner, Observer { prepareData(it) })
-//        viewModel.getWorldFilmsFromLocalSource()
-
         binding.mainRecyclerView.adapter = adapter
-
-
+        viewModel = ViewModelProvider(this).get(ViewModelBase:: class.java)
+        viewModel.getLiveData().observe(viewLifecycleOwner, { prepareData(it) })
+        viewModel.getPopularMovieFromRemoteSource("ru", 10)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val filmServer = FilmServer(binding)
-        filmServer.getPopularMovieList(filmServer.buildPopMovieListUrl("ru", 1), adapter)
-
-//        viewModel = ViewModelProvider(this).get(ViewModelBase::class.java)
-//        viewModel.getLiveData().observe(viewLifecycleOwner, Observer { prepareData(it) })
-//        viewModel.getWorldFilmsFromLocalSource()
-
-    }
-
 
     private fun prepareData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
-//                adapter.filmData = appState.filmData
+                adapter.filmData = appState.filmData
             }
             is AppState.Loading -> {
 //                binding.txtFilmName.text = "Loading"
@@ -107,7 +83,6 @@ class MainFragment : Fragment() {
 
     interface OnItemViewClickListener {
         fun onItemViewClick(film: FilmShortDetails) {
-
         }
     }
 
