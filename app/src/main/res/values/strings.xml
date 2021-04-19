@@ -1,15 +1,14 @@
 <resources>
-    <string name="app_name">Фильмотека </string>
+    <string name="app_name">Фильмотека</string>
 
-<!--    <string name="film_name_txt">Хижина в лесу</string>-->
-<!--    <string name="film_genre_txt">Ужасы, комедия, фэнтези</string>-->
-<!--    <string name="film_year_txt">2011</string>-->
-<!--    <string name="continue_finding_btn">Продолжить поиск</string>-->
+
+    <!--    FilmDetailsFragment-->
     <string name="film_name_txt">Film name</string>
     <string name="film_genre_txt">Genre</string>
     <string name="film_year_txt">Year</string>
     <string name="continue_finding_btn">Продолжить поиск</string>
-
+    <string name="img_film_poster_content_description">Логотип фильма</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_film_continue_text">Продолжительность:</string>
 </resources>

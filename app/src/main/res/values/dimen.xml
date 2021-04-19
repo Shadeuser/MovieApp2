@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="film_name_text_size">26dp</dimen>
+
+    <dimen name="main_recyclerview_item_padding">15dp</dimen>
+    <dimen name="main_recyclerview_item_text_size">25sp</dimen>
+    <dimen name="main_recycler_item_line_height">1dp</dimen>
+    <dimen name="main_recycler_item_line_margin_end">20dp</dimen>
+
+
+
+
+    
+<!--    FilmDetailsFragment-->
+    <dimen name="film_name_text_size">26sp</dimen>
+    <dimen name="txt_film_name_margin_top">5dp</dimen>
+    <dimen name="img_film_poster_margin_top">30dp</dimen>
+    <dimen name="txt_genre_margin_top">30dp</dimen>
+    <dimen name="txt_genre_text_size">20sp</dimen>
+    <dimen name="txt_year_margin_top">30dp</dimen>
+    <dimen name="txt_year_text_size">20sp</dimen>
+    <dimen name="img_film_poster_width">150dp</dimen>
+    <dimen name="img_film_poster_height">200dp</dimen>
+    <dimen name="txt_film_continue_margin_top">20dp</dimen>
+    <dimen name="txt_film_continue_text_size">20sp</dimen>
+
 
 </resources>
