@@ -7,6 +7,7 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.viewbinding.ViewBinding
 import com.example.movieapp.databinding.FragmentFilmDetailsBinding
+import com.example.movieapp.ui.main.FilmDetailsFragment
 import com.example.movieapp.ui.main.MainAdapter
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
@@ -89,7 +90,7 @@ class FilmServer<T : ViewBinding>(
         view: View,
         inBinding: FragmentFilmDetailsBinding
     ) {
-
+        FilmDetailsFragment.thisMovie = movieDetails
         inBinding.txtFilmName.text = movieDetails.title
         "Продолжительность: ${movieDetails.runtime} мин.".also { inBinding.txtFilmContinue.text = it }
         Picasso.with(view.context)
@@ -121,7 +122,7 @@ class FilmServer<T : ViewBinding>(
 
 
     fun buildMovieDetailsUrl(
-        id: Int,
+        id: Long,
         language: String = "ru",
         region: String = "",
     ): String {

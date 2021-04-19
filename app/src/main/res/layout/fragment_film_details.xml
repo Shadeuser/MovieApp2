@@ -87,9 +87,22 @@
             android:textSize="@dimen/txt_film_continue_text_size"
             android:layout_marginTop="@dimen/txt_film_continue_margin_top" />
 
+
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/chkViewedFilms"
+            android:text="Добавить в просмотренные"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnContinue"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"
+            android:checked="false"/>
+
         <Button
             android:id="@+id/btnContinue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/continue_finding_btn"
             app:layout_constraintBottom_toBottomOf="parent"

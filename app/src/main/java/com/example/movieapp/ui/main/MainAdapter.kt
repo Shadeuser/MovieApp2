@@ -3,10 +3,12 @@ package com.example.movieapp.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.model.*
+import com.squareup.picasso.Picasso
 
 class MainAdapter(
     private var onItemViewClickListener: MainFragment.OnItemViewClickListener?
@@ -39,6 +41,14 @@ class MainAdapter(
     inner class MainViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(film: FilmShortDetails) {
             itemView.findViewById<TextView>(R.id.txtViewMainRecycclerItem).text = film.title
+//            itemView.findViewById<ImageView>(R.id.imgItem).setImageResource(R.drawable.terminator2)
+
+//            Picasso.with()
+//                .load(film.poster_path)
+//                .into(
+//                    itemView.findViewById(ImageView)(R.id.imgItem)
+//                )
+
             itemView.setOnClickListener {
                 onItemViewClickListener?.onItemViewClick(film)
             }

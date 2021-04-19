@@ -19,10 +19,6 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: ViewModelBase
 
-
-
-
-
     private val adapter = MainAdapter(object : OnItemViewClickListener {
         override fun onItemViewClick(film: FilmShortDetails) {
             super.onItemViewClick(film)
@@ -55,6 +51,12 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ViewModelBase:: class.java)
         viewModel.getLiveData().observe(viewLifecycleOwner, { prepareData(it) })
         viewModel.getPopularMovieFromRemoteSource("ru", 10)
+
+        binding.btnShowBd.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container, ViewedMovieFragment.newInstance())
+                .commitNow()
+        }
     }
 
     private fun prepareData(appState: AppState) {

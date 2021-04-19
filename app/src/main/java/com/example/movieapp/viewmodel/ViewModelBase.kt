@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.example.movieapp.model.*
 import retrofit2.Call
 import retrofit2.Response
-import java.lang.Thread.sleep
 
 //    private val repositoryImpl: Repository = RepositoryImpl()
 class ViewModelBase (

@@ -3,6 +3,8 @@ package com.example.movieapp.model
 class MovieDetails() {
     val adult: Boolean = true
 
+    val id: Long = 0
+
     val budget: Int = 0
 
     val title: String = ""
